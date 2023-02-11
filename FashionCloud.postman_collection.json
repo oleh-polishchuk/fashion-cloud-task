@@ -1,0 +1,138 @@
+{
+	"info": {
+		"_postman_id": "8c9dda5f-bed1-4663-8dec-ce2a1015da67",
+		"name": "FashionCloud",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "490075"
+	},
+	"item": [
+		{
+			"name": "Cache Record",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/cache/key7",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"cache",
+						"key7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cache Keys",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/keys",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"keys"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cache Record",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"data\": \"john doe\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/cache/key1",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"cache",
+						"key1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cache Record",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/cache/key7",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"cache",
+						"key7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cache",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/cache",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"cache"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2U2ZTA2ZDExYzYxNzI3ODNjYzc3MzciLCJpYXQiOjE2NzYwNzUxMTcsImV4cCI6MTY3NjE2MTUxN30.KgxDYjRnm9qozNd10YX8t8ysW8LMwpK8vkU8IzpKHUA"
+		}
+	]
+}
