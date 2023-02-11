@@ -1,10 +1,4 @@
-const STATUS_CODES = {
-  OK: 200,
-  BAD_REQUEST: 400,
-  UN_AUTHORISED: 403,
-  NOT_FOUND: 404,
-  INTERNAL_ERROR: 500,
-};
+const httpStatus = require('http-status');
 
 class AppError extends Error {
   constructor(
@@ -30,7 +24,7 @@ class AppError extends Error {
 class APIError extends AppError {
   constructor(
     name,
-    statusCode = STATUS_CODES.INTERNAL_ERROR,
+    statusCode = httpStatus.INTERNAL_SERVER_ERROR,
     description = 'Internal Server Error',
     isOperational = true,
   ) {
@@ -43,7 +37,7 @@ class BadRequestError extends AppError {
   constructor(description = 'Bad request', logingErrorResponse) {
     super(
       'NOT FOUND',
-      STATUS_CODES.BAD_REQUEST,
+      httpStatus.BAD_REQUEST,
       description,
       true,
       false,
@@ -55,13 +49,7 @@ class BadRequestError extends AppError {
 //400
 class ValidationError extends AppError {
   constructor(description = 'Validation Error', errorStack) {
-    super(
-      'BAD REQUEST',
-      STATUS_CODES.BAD_REQUEST,
-      description,
-      true,
-      errorStack,
-    );
+    super('BAD REQUEST', httpStatus.BAD_REQUEST, description, true, errorStack);
   }
 }
 
@@ -70,5 +58,4 @@ module.exports = {
   APIError,
   BadRequestError,
   ValidationError,
-  STATUS_CODES,
 };

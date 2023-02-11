@@ -1,7 +1,8 @@
 const config = require('config');
+const httpStatus = require('http-status');
 
 const { CacheModel } = require('../models');
-const { APIError, STATUS_CODES } = require('../../utils/app-errors');
+const { APIError } = require('../../utils/app-errors');
 const { GetExpirationDate } = require('../../utils');
 
 class CacheRepository {
@@ -13,7 +14,7 @@ class CacheRepository {
     } catch (err) {
       throw APIError(
         'API Error',
-        STATUS_CODES.INTERNAL_ERROR,
+        httpStatus.INTERNAL_SERVER_ERROR,
         'Unable to Create Cache',
       );
     }
@@ -25,7 +26,7 @@ class CacheRepository {
     } catch (err) {
       throw APIError(
         'API Error',
-        STATUS_CODES.INTERNAL_ERROR,
+        httpStatus.INTERNAL_SERVER_ERROR,
         'Unable to List Cache Records',
       );
     }
@@ -37,7 +38,7 @@ class CacheRepository {
     } catch (err) {
       throw APIError(
         'API Error',
-        STATUS_CODES.INTERNAL_ERROR,
+        httpStatus.INTERNAL_SERVER_ERROR,
         'Unable to Find Cache Record',
       );
     }
@@ -50,7 +51,7 @@ class CacheRepository {
     } catch (err) {
       throw APIError(
         'API Error',
-        STATUS_CODES.INTERNAL_ERROR,
+        httpStatus.INTERNAL_SERVER_ERROR,
         'Unable to Find Oldest Cache Record',
       );
     }
@@ -67,7 +68,7 @@ class CacheRepository {
     } catch (err) {
       throw APIError(
         'API Error',
-        STATUS_CODES.INTERNAL_ERROR,
+        httpStatus.INTERNAL_SERVER_ERROR,
         'Unable to Update Cache Record',
       );
     }
@@ -79,7 +80,7 @@ class CacheRepository {
     } catch (err) {
       throw APIError(
         'API Error',
-        STATUS_CODES.INTERNAL_ERROR,
+        httpStatus.INTERNAL_SERVER_ERROR,
         'Unable to Delete Cache Record',
       );
     }
@@ -91,7 +92,7 @@ class CacheRepository {
     } catch (err) {
       throw APIError(
         'API Error',
-        STATUS_CODES.INTERNAL_ERROR,
+        httpStatus.INTERNAL_SERVER_ERROR,
         'Unable to Delete All Cache Records',
       );
     }
@@ -104,7 +105,7 @@ class CacheRepository {
     } catch (err) {
       throw APIError(
         'API Error',
-        STATUS_CODES.INTERNAL_ERROR,
+        httpStatus.INTERNAL_SERVER_ERROR,
         'Unable to Update Cache Record',
       );
     }
