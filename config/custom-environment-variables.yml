@@ -3,5 +3,8 @@ environment: NODE_ENV
 app:
   port: APP_PORT
 
+cache:
+  ttl: CACHE_TTL
+
 mongodb:
   url: MONGODB_URL

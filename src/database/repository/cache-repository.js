@@ -1,10 +1,14 @@
+const config = require('config');
+
 const { CacheModel } = require('../models');
 const { APIError, STATUS_CODES } = require('../../utils/app-errors');
+const { GetExpirationDate } = require('../../utils');
 
 class CacheRepository {
   async CreateCache({ key, data }) {
     try {
-      const cache = new CacheModel({ key, data });
+      const expiresAt = GetExpirationDate(config.cache.ttl);
+      const cache = new CacheModel({ key, data, expiresAt });
       return cache.save();
     } catch (err) {
       throw APIError(
@@ -41,7 +45,12 @@ class CacheRepository {
 
   async UpdateCache({ key, data }) {
     try {
-      return CacheModel.findOneAndUpdate({ key }, { data }, { new: true });
+      const expiresAt = GetExpirationDate(config.cache.ttl);
+      return CacheModel.findOneAndUpdate(
+        { key },
+        { data, expiresAt },
+        { new: true },
+      );
     } catch (err) {
       throw APIError(
         'API Error',
@@ -71,6 +80,19 @@ class CacheRepository {
         'API Error',
         STATUS_CODES.INTERNAL_ERROR,
         'Unable to Delete All Cache Records',
+      );
+    }
+  }
+
+  async ResetCacheExpirationDateByKey({ key }) {
+    try {
+      const expiresAt = GetExpirationDate(config.cache.ttl);
+      await CacheModel.findOneAndUpdate({ key }, { expiresAt }, { new: true });
+    } catch (err) {
+      throw APIError(
+        'API Error',
+        STATUS_CODES.INTERNAL_ERROR,
+        'Unable to Update Cache Record',
       );
     }
   }

@@ -3,5 +3,8 @@ environment: development
 app:
   port: 3000
 
+cache:
+  ttl: 60000
+
 mongodb:
   url: ~

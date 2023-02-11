@@ -10,6 +10,11 @@ const envVarsSchema = Joi.object().keys({
       port: Joi.number().required(),
     })
     .required(),
+  cache: Joi.object()
+    .keys({
+      ttl: Joi.number().required(),
+    })
+    .required(),
   mongodb: Joi.object()
     .keys({
       url: Joi.string().required(),

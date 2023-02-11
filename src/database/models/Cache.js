@@ -6,6 +6,7 @@ const CacheSchema = new Schema(
   {
     key: String,
     data: Schema.Types.Mixed,
+    expiresAt: Date,
   },
   {
     toJSON: {

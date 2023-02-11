@@ -30,6 +30,7 @@ class CacheService {
       let existingCacheRecord = await this.repository.FindCacheByKey({ key });
       if (existingCacheRecord) {
         console.log(`==> Cache hit`);
+        await this.repository.ResetCacheExpirationDateByKey({ key });
       } else {
         console.log(`==> Cache miss`);
         const data = GenerateRandomData();
