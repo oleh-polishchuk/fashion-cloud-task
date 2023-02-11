@@ -13,6 +13,7 @@ const envVarsSchema = Joi.object().keys({
   cache: Joi.object()
     .keys({
       ttl: Joi.number().required(),
+      limit: Joi.number().required(),
     })
     .required(),
   mongodb: Joi.object()

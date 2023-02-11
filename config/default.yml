@@ -4,7 +4,8 @@ app:
   port: 3000
 
 cache:
-  ttl: 60 # in seconds
+  ttl: 120 # in seconds
+  limit: 5 # number of max items inclusive
 
 mongodb:
   url: ~

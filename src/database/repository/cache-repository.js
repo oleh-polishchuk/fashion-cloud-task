@@ -43,6 +43,19 @@ class CacheRepository {
     }
   }
 
+  async FindOldestCacheItem() {
+    try {
+      const items = await CacheModel.find().sort({ expiresAt: 1 }).limit(1);
+      return items[0];
+    } catch (err) {
+      throw APIError(
+        'API Error',
+        STATUS_CODES.INTERNAL_ERROR,
+        'Unable to Find Oldest Cache Record',
+      );
+    }
+  }
+
   async UpdateCache({ key, data }) {
     try {
       const expiresAt = GetExpirationDate(config.cache.ttl);
@@ -95,6 +108,10 @@ class CacheRepository {
         'Unable to Update Cache Record',
       );
     }
+  }
+
+  Count() {
+    return CacheModel.count();
   }
 }
 

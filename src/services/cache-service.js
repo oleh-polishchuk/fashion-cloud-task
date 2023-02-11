@@ -1,3 +1,4 @@
+const config = require('config');
 const { CacheRepository } = require('../database');
 const { FormatData, GenerateRandomData } = require('../utils');
 const { APIError } = require('../utils/app-errors');
@@ -5,6 +6,17 @@ const { APIError } = require('../utils/app-errors');
 class CacheService {
   constructor() {
     this.repository = new CacheRepository();
+  }
+
+  async CreateCache({ key, data }) {
+    const cacheItemsCount = await this.repository.Count();
+    if (cacheItemsCount >= config.cache.limit) {
+      const oldestCacheItem = await this.repository.FindOldestCacheItem();
+      if (oldestCacheItem) {
+        await this.repository.DeleteByKey({ key: oldestCacheItem.key });
+      }
+    }
+    return this.repository.CreateCache({ key, data });
   }
 
   async CreateOrUpdate({ key, data }) {
@@ -16,7 +28,7 @@ class CacheService {
         existingCache = await this.repository.UpdateCache({ key, data });
       } else {
         isNew = true;
-        existingCache = await this.repository.CreateCache({ key, data });
+        existingCache = await this.CreateCache({ key, data });
       }
       existingCache.isNew = isNew;
       return FormatData(existingCache);
@@ -34,7 +46,7 @@ class CacheService {
       } else {
         console.log(`==> Cache miss`);
         const data = GenerateRandomData();
-        existingCacheRecord = await this.repository.CreateCache({ key, data });
+        existingCacheRecord = await this.CreateCache({ key, data });
       }
       return FormatData(existingCacheRecord);
     } catch (err) {
