@@ -8,6 +8,11 @@ const CacheSchema = new Schema(
     data: Schema.Types.Mixed,
   },
   {
+    toJSON: {
+      transform(doc, ret) {
+        delete ret.__v;
+      },
+    },
     timestamps: true,
   },
 );

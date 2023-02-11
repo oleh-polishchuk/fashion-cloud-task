@@ -2,6 +2,18 @@ const { CacheModel } = require('../models');
 const { APIError, STATUS_CODES } = require('../../utils/app-errors');
 
 class CacheRepository {
+  async ListKeys() {
+    try {
+      return CacheModel.find({}, { _id: 0, key: 1 });
+    } catch (err) {
+      throw APIError(
+        'API Error',
+        STATUS_CODES.INTERNAL_ERROR,
+        'Unable to Find Cache Record',
+      );
+    }
+  }
+
   async FindCacheByKey({ key }) {
     try {
       return CacheModel.findOne({ key: key });
