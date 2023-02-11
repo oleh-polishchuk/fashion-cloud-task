@@ -1,4 +1,5 @@
 # Config
+.env
 config/local*.yml
 
 # Dependencies

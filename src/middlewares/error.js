@@ -2,6 +2,7 @@ const config = require('config');
 const mongoose = require('mongoose');
 const httpStatus = require('http-status');
 const ApiError = require('../utils/ApiError');
+const logger = require('../utils/logger');
 
 const errorConverter = (err, req, res, next) => {
   let error = err;
@@ -33,7 +34,7 @@ const errorHandler = (err, req, res, next) => {
   };
 
   if (config.environment === 'development') {
-    console.error(err);
+    logger.error(err);
   }
 
   res.status(statusCode).send(response);

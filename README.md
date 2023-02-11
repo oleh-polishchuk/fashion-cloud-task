@@ -5,10 +5,11 @@
 REST API that exposes methods to interact with a cache.
 
 To simplify the review process, please use an existing [postman collection](FashionCloud.postman_collection.json).
+We expect you use node [v18.14.0](https://nodejs.org/en/) or higher.
 
 ## Quick Start
 
-To run the server and MongoDB inside a Docker, execute the command
+To run a project, simply run:
 
 ```bash
 docker compose up -d
@@ -16,11 +17,24 @@ docker compose up -d
 
 ## Manual Start
 
+If you would still prefer to run the project manually, follow these steps:
+
 ### Installation
 
 ```bash
 npm install
 ```
+
+### Environment variables
+
+Set the environment variables:
+
+```bash
+cp config/local.yml.example config/local.yml
+
+# open local.yml and modify the environment variables (if needed)
+```
+
 
 ### Running the app
 

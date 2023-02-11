@@ -1,3 +1,7 @@
+# Config
+.env
+config/local*.yml
+
 # Dependencies
 node_modules
 

@@ -1,0 +1,12 @@
+environment: development
+
+app:
+  port: 3000
+
+cache:
+  ttl: 3600 # in seconds
+  limit: 5 # number of max items inclusive
+
+mongodb:
+  url: mongodb://localhost:27017/fashion-cloud-develop
+

@@ -1,8 +1,9 @@
 const config = require('config');
+const httpStatus = require('http-status');
 const { CacheRepository } = require('../database');
 const { FormatData, GenerateRandomData } = require('../utils');
 const ApiError = require('../utils/ApiError');
-const httpStatus = require('http-status');
+const logger = require('../utils/logger');
 
 class CacheService {
   constructor() {
@@ -55,10 +56,10 @@ class CacheService {
     try {
       let existingCacheRecord = await this.repository.FindCacheByKey({ key });
       if (existingCacheRecord) {
-        console.log(`==> Cache hit`);
+        logger.info(`Cache hit`);
         await this.repository.ResetCacheExpirationDateByKey({ key });
       } else {
-        console.log(`==> Cache miss`);
+        logger.info(`Cache miss`);
         const data = GenerateRandomData();
         existingCacheRecord = await this.CreateCache({ key, data });
       }
