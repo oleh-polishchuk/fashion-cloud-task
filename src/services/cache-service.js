@@ -50,6 +50,14 @@ class CacheService {
       throw new APIError('Data Not found', err);
     }
   }
+
+  async DeleteByKey({ key }) {
+    try {
+      await this.repository.DeleteByKey({ key });
+    } catch (err) {
+      throw new APIError('Data Not found', err);
+    }
+  }
 }
 
 module.exports = CacheService;

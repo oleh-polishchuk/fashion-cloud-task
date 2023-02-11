@@ -10,7 +10,7 @@ class CacheRepository {
       throw APIError(
         'API Error',
         STATUS_CODES.INTERNAL_ERROR,
-        'Unable to Create Customer',
+        'Unable to Create Cache',
       );
     }
   }
@@ -22,7 +22,7 @@ class CacheRepository {
       throw APIError(
         'API Error',
         STATUS_CODES.INTERNAL_ERROR,
-        'Unable to Find Cache Record',
+        'Unable to List Cache Records',
       );
     }
   }
@@ -46,7 +46,19 @@ class CacheRepository {
       throw APIError(
         'API Error',
         STATUS_CODES.INTERNAL_ERROR,
-        'Unable to Find Cache Record',
+        'Unable to Update Cache Record',
+      );
+    }
+  }
+
+  async DeleteByKey({ key }) {
+    try {
+      return CacheModel.deleteOne({ key });
+    } catch (err) {
+      throw APIError(
+        'API Error',
+        STATUS_CODES.INTERNAL_ERROR,
+        'Unable to Delete Cache Record',
       );
     }
   }

@@ -34,4 +34,14 @@ module.exports = (app) => {
       next(err);
     }
   });
+
+  app.delete('/cache/:key', async (req, res, next) => {
+    try {
+      const { key } = req.params;
+      await service.DeleteByKey({ key });
+      return res.status(httpStatus.NO_CONTENT).send();
+    } catch (err) {
+      next(err);
+    }
+  });
 };
