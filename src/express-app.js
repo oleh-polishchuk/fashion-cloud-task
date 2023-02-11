@@ -6,7 +6,7 @@ const cors = require('cors');
 const httpStatus = require('http-status');
 
 const ApiError = require('./utils/ApiError');
-const { cache } = require('./api');
+const { system, cache } = require('./api');
 
 module.exports = async (app) => {
   // set security HTTP headers
@@ -29,6 +29,7 @@ module.exports = async (app) => {
   app.options('*', cors());
 
   // api routes
+  system(app);
   cache(app);
 
   // handle any unknown api request

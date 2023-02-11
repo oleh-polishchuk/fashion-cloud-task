@@ -4,6 +4,14 @@ const CacheService = require('../services/cache-service');
 module.exports = (app) => {
   const service = new CacheService();
 
+  app.get('/', async (req, res, next) => {
+    try {
+      return res.send('The server is up and running!');
+    } catch (err) {
+      next(err);
+    }
+  });
+
   app.get('/cache/:key', async (req, res, next) => {
     try {
       const { key } = req.params;
