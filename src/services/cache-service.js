@@ -9,6 +9,19 @@ class CacheService {
     this.repository = new CacheRepository();
   }
 
+  /**
+   * Method creates a new cache item.
+   *
+   * Attention!
+   * The number of entries allowed in the cache is limited.
+   * By default, the limit is 5 records. You can modify the value in config/default.yml
+   *
+   * Attention!
+   * If the maximum amount of cached items is reached, some old entry will be overwritten.
+   * The field "expiresAt" contains the expiration date. By default, the value is 1 hour.
+   * The entry with the oldest "expiresAt" field will be overwritten in case of limit is reached.
+   * The oldest "expiresAt" means the fewer hits for this item.
+   */
   async CreateCache({ key, data }) {
     const cacheItemsCount = await this.repository.Count();
     if (cacheItemsCount >= config.cache.limit) {

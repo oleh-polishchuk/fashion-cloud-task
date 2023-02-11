@@ -4,14 +4,9 @@ const CacheService = require('../services/cache-service');
 module.exports = (app) => {
   const service = new CacheService();
 
-  app.get('/', async (req, res, next) => {
-    try {
-      return res.send('The server is up and running!');
-    } catch (err) {
-      next(err);
-    }
-  });
-
+  /**
+   * An endpoint returns the cached data for a given key
+   */
   app.get('/cache/:key', async (req, res, next) => {
     try {
       const { key } = req.params;
@@ -22,6 +17,21 @@ module.exports = (app) => {
     }
   });
 
+  /**
+   * An endpoint returns all stored keys in the cache
+   */
+  app.get('/keys', async (req, res, next) => {
+    try {
+      const { data } = await service.GetCacheKeys();
+      return res.json({ data: data });
+    } catch (err) {
+      next(err);
+    }
+  });
+
+  /**
+   * An endpoint creates and updates the data for a given key
+   */
   app.put('/cache/:key', async (req, res, next) => {
     try {
       const { key } = req.params;
@@ -34,15 +44,9 @@ module.exports = (app) => {
     }
   });
 
-  app.get('/keys', async (req, res, next) => {
-    try {
-      const { data } = await service.GetCacheKeys();
-      return res.json({ data: data });
-    } catch (err) {
-      next(err);
-    }
-  });
-
+  /**
+   * An endpoint removes a given key from the cache
+   */
   app.delete('/cache/:key', async (req, res, next) => {
     try {
       const { key } = req.params;
@@ -53,6 +57,9 @@ module.exports = (app) => {
     }
   });
 
+  /**
+   * An endpoint removes all keys from the cache
+   */
   app.delete('/cache', async (req, res, next) => {
     try {
       await service.DeleteAll();
