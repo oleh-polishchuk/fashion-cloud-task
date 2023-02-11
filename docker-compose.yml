@@ -13,6 +13,7 @@ services:
       - node-network
     environment:
       MONGODB_URL: mongodb://root:root@mongodb:27017/fashion-cloud-development?authSource=admin&authMechanism=SCRAM-SHA-1
+      TZ: UTC
     depends_on:
       - mongodb
 
@@ -30,6 +31,7 @@ services:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: root
       MONGO_INITDB_DATABASE: fashion-cloud
+      TZ: UTC
     restart: always
 
 volumes:
