@@ -1,0 +1,7 @@
+environment: development
+
+app:
+  port: 3000
+
+mongodb:
+  url: ~

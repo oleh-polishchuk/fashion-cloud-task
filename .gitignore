@@ -1,0 +1,18 @@
+# Config
+config/local*.yml
+
+# Dependencies
+/node_modules
+
+# Logs
+npm-debug.log*
+
+# OS
+.DS_Store
+
+# Tests
+/coverage
+
+# IDEs and editors
+/.idea
+.vscode/*

@@ -1,0 +1,7 @@
+environment: NODE_ENV
+
+app:
+  port: APP_PORT
+
+mongodb:
+  url: MONGODB_URL

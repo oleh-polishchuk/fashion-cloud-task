@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  server:
+    build: .
+    command: npm run start
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/usr/app/
+      - /usr/app/node_modules
+    networks:
+      - node-network
+    environment:
+      MONGODB_URL: mongodb://root:root@mongodb:27017/fashion-cloud-development?authSource=admin&authMechanism=SCRAM-SHA-1
+    depends_on:
+      - mongodb
+
+  mongodb:
+    container_name: mongodb
+    image: mongo:latest
+    ports:
+      - '27017:27017'
+    volumes:
+      - db-data:/data/db
+      - ./scripts/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    networks:
+      - node-network
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+      MONGO_INITDB_DATABASE: fashion-cloud
+    restart: always
+
+volumes:
+  db-data:
+
+networks:
+  node-network:
+    driver: bridge
