@@ -1,7 +1,8 @@
 const config = require('config');
 const { CacheRepository } = require('../database');
 const { FormatData, GenerateRandomData } = require('../utils');
-const { APIError } = require('../utils/app-errors');
+const ApiError = require('../utils/ApiError');
+const httpStatus = require('http-status');
 
 class CacheService {
   constructor() {
@@ -33,7 +34,7 @@ class CacheService {
       existingCache.isNew = isNew;
       return FormatData(existingCache);
     } catch (err) {
-      throw new APIError('Data Not found', err);
+      throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, err);
     }
   }
 
@@ -50,7 +51,7 @@ class CacheService {
       }
       return FormatData(existingCacheRecord);
     } catch (err) {
-      throw new APIError('Data Not found', err);
+      throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, err);
     }
   }
 
@@ -60,7 +61,7 @@ class CacheService {
       const keys = cacheKeys.map((cacheKey) => cacheKey.key);
       return FormatData(keys);
     } catch (err) {
-      throw new APIError('Data Not found', err);
+      throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, err);
     }
   }
 
@@ -68,7 +69,7 @@ class CacheService {
     try {
       await this.repository.DeleteByKey({ key });
     } catch (err) {
-      throw new APIError('Data Not found', err);
+      throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, err);
     }
   }
 
@@ -76,7 +77,7 @@ class CacheService {
     try {
       await this.repository.DeleteAll();
     } catch (err) {
-      throw new APIError('Data Not found', err);
+      throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, err);
     }
   }
 }

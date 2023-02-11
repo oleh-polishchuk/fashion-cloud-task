@@ -4,7 +4,7 @@
 
 REST API that exposes methods to interact with a cache.
 
-To simplify the review process, please use an existing postman collection.
+To simplify the review process, please use an existing [postman collection](FashionCloud.postman_collection.json).
 
 ## Quick Start
 
