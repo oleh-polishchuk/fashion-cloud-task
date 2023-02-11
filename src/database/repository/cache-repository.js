@@ -62,6 +62,18 @@ class CacheRepository {
       );
     }
   }
+
+  async DeleteAll() {
+    try {
+      return CacheModel.deleteMany({});
+    } catch (err) {
+      throw APIError(
+        'API Error',
+        STATUS_CODES.INTERNAL_ERROR,
+        'Unable to Delete All Cache Records',
+      );
+    }
+  }
 }
 
 module.exports = CacheRepository;

@@ -44,4 +44,13 @@ module.exports = (app) => {
       next(err);
     }
   });
+
+  app.delete('/cache', async (req, res, next) => {
+    try {
+      await service.DeleteAll();
+      return res.status(httpStatus.NO_CONTENT).send();
+    } catch (err) {
+      next(err);
+    }
+  });
 };

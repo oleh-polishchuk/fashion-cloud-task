@@ -58,6 +58,14 @@ class CacheService {
       throw new APIError('Data Not found', err);
     }
   }
+
+  async DeleteAll() {
+    try {
+      await this.repository.DeleteAll();
+    } catch (err) {
+      throw new APIError('Data Not found', err);
+    }
+  }
 }
 
 module.exports = CacheService;
